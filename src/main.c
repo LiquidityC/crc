@@ -78,7 +78,7 @@ static int parse_args(Rt *rt, int argc, char *argv[])
 			break;
 		case 'l':
 			list_crc_types();
-			break;
+			return 0;
 		default:
 			print_usage(argv[0]);
 			return 1;
