@@ -8,8 +8,6 @@
 
 #define MAX_DATA_LEN 1024
 
-typedef unsigned short u16;
-
 typedef enum crc_type {
 	CRC_16_CCITT_FALSE,
 	UNKNOWN,
