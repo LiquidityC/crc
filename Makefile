@@ -8,8 +8,9 @@ OBJDIR	= .obj
 
 MODULE		= crc
 CC			?= gcc
-LDFLAGS		?=
-CFLAGS		?= -I$(INCDIR) -DVERSION=$(VERSION)
+LDFLAGS		?= $(shell pkg-config --libs zlib)
+CFLAGS		?= -I$(INCDIR) -DVERSION=$(VERSION) -Werror -Wextra -Wall
+CFLAGS		+= $(shell pkg-config --cflags zlib)
 RM			= rm
 FORMAT		= clang-format
 CHECK		= cppcheck

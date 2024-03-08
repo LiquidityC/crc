@@ -5,11 +5,13 @@
 #include "common.h"
 
 #include "crc16_ccitt_false.h"
+#include "crc32.h"
 
 #define MAX_DATA_LEN 1024
 
 typedef enum crc_type {
 	CRC_16_CCITT_FALSE,
+    CRC_32,
 	UNKNOWN,
 } CrcType;
 
@@ -21,7 +23,8 @@ typedef struct CrcTypeEntry {
 
 static const CrcTypeEntry crc_type_table[] = {
 	{ "crc16-ccitt-false", CRC_16_CCITT_FALSE, crc16_ccitt_false_compute },
-	{ NULL, UNKNOWN },
+	{ "crc32", CRC_32, crc32_compute },
+	{ NULL, UNKNOWN, NULL },
 };
 
 typedef struct rt {
@@ -63,7 +66,7 @@ static const CrcTypeEntry *parse_type(const char *type)
 	return entry;
 }
 
-static int parse_args(Rt *rt, int argc, char *argv[])
+static int parse_args(Rt *rt, size_t argc, char *argv[])
 {
 	int opt;
 	while ((opt = getopt(argc, argv, "hlt:")) != -1) {
@@ -112,7 +115,7 @@ static int parse_args(Rt *rt, int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-	Rt rt = { NULL, { '\0' } };
+	Rt rt = { NULL, { '\0' }, 0 };
 
 	if (argc < 2) {
 		print_usage(argv[0]);
