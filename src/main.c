@@ -11,7 +11,7 @@
 
 typedef enum crc_type {
 	CRC_16_CCITT_FALSE,
-    CRC_32,
+	CRC_32,
 	UNKNOWN,
 } CrcType;
 

@@ -3,5 +3,5 @@
 
 u64 crc32_compute(const u8 *data, size_t len)
 {
-    return crc32(0, data, len);
+	return crc32(0, data, len);
 }
